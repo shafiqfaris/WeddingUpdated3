@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Video</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: #fffaf8;
+    }
+
+    .video-container {
+      width: 100%;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    section {
+      width: 100%;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    #gallery {
+      background-color: #fff0f5;
+    }
+
+    #countdown {
+      background-color: #ffffff;
+    }
+
+    #rsvp {
+      background-color: #fff0f5;
+    }
+
+    .gallery-photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .gallery-photos img {
+      width: 150px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Top Video -->
+  <div class="video-container">
+    <video src="assets/video.mp4" autoplay muted loop playsinline></video>
+  </div> 
+
+  <!-- ✅ Navigation Buttons Section -->
+<section id="map-buttons" style="background-color: #fff; padding: 30px; text-align: center;">
+  <h2>Navigate to The Venue</h2>
+  <div style="margin-top: 20px;">
+    <a href="https://ul.waze.com/ul?place=ChIJFeIA5nY3zDERczvTo7gJuJY&ll=3.13524710%2C101.71671640&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank"
+       style="margin: 10px; padding: 10px 20px; background-color: #0080ffee; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+      Open in Waze
+    </a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=3.123456,101.123456" target="_blank"
+       style="margin: 10px; padding: 10px 20px; background-color: #34a853; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+      Open in Google Maps
+    </a>
+  </div>
+</section>
+
+
+  <!-- ✅ Scroll Down Sections -->
+  <section id="gallery">
+    <h2>Pictures</h2>
+    <div class="gallery-photos">
+      <img src="assets/photo1.png" alt="photo1">
+      <img src="assets/photo2.png" alt="photo2">
+      <img src="assets/photo3.png" alt="photo3">
+    </div>
+  </section>
+
+  <section id="countdown">
+    <h2>Countdown Kak Atie Kahwin</h2>
+    <div id="timer" style="font-size: 2rem; margin-top: 10px;"></div>
+  </section>
+
+  <section id="rsvp">
+    <h2>RSVP</h2>
+    <a href="rsvp.html" style="padding: 10px 20px; background: #d63384; color: white; border-radius: 5px; text-decoration: none;">Go to RSVP Page</a>
+  </section>
+
+  <!-- ✅ Countdown Script -->
+  <script>
+    const countdownDate = new Date("May 25, 2025 13:00:00").getTime();
+    const timer = document.getElementById("timer");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+
+</body>
+</html>

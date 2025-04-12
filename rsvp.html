@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RSVP – Fairuz & Izzati</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fffdf8;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .rsvp-container {
+      background: #fff0f5;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #a33370;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Georgia', serif;
+    }
+
+    button {
+      background-color: #d63384;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #a33370;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .success-message {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: green;
+    }
+
+    .error-message {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="rsvp-container">
+    <h1>RSVP</h1>
+
+    <form id="rsvp-form">
+      <input type="text" name="name" placeholder="Your Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <select name="attendance" required>
+        <option value="">Will you attend?</option>
+        <option value="yes">Yes, I'll be there</option>
+        <option value="no">Sorry, I can't make it</option>
+      </select>
+      <select name="guests" required>
+        <option value="">Number of Guests Attending</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+      
+      <textarea name="message" placeholder="Leave us a message (optional)" rows="3"></textarea>
+      <button type="submit">Send RSVP</button>
+    </form>
+
+    <div id="response" class="success-message" style="display: none;"></div>
+    <a href="index.html">← Back to Invitation</a>
+  </div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxh5Y3ZVOO47WH1dCvScJKtX70Z7UYdFSOeLVaF_OGIGr8v2XzzwAsLvXtPhqvqVHYE/exec";
+    const form = document.getElementById("rsvp-form");
+    const responseBox = document.getElementById("response");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(response => response.text())
+        .then(text => {
+          if (text === "Duplicate RSVP") {
+            responseBox.className = "error-message";
+            responseBox.textContent = "You’ve already submitted an RSVP with this email.";
+          } else {
+            responseBox.className = "success-message";
+            responseBox.textContent = "Thank you for your RSVP! A confirmation email has been sent.";
+            form.reset();
+          }
+          responseBox.style.display = "block";
+        })
+        .catch(error => {
+          responseBox.className = "error-message";
+          responseBox.textContent = "Something went wrong. Please try again later.";
+          responseBox.style.display = "block";
+        });
+    });
+  </script>
+</body>
+</html>

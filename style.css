@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fffdf8;
+  font-family: 'Georgia', serif;
+}
+
+/* Keep this */
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Keep this too */
+.video-container video {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
